@@ -27,13 +27,19 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build and test with Maven
-        run: mvn clean install
+        run: mvn clean verify
       - name: Archive test reports
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: test-reports
           path: tasktooine-api/target/surefire-reports/*.xml
+      - name: Archive coverage report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: jacoco-report
+          path: tasktooine-api/target/site/jacoco/jacoco.xml
 
   # SonarQube code quality scan
   scan-sonarqube:
@@ -61,6 +67,12 @@ jobs:
           name: test-reports
           path: tasktooine-api/target/surefire-reports
 
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: jacoco-report
+          path: tasktooine-api/target/site/jacoco
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         with:
@@ -74,5 +86,6 @@ jobs:
             -Dsonar.java.libraries=/home/runner/.m2/repository/**/*.jar
 
             -Dsonar.junit.reportPaths=tasktooine-api/target/surefire-reports
+            -Dsonar.coverage.jacoco.xmlReportPaths=tasktooine-api/target/site/jacoco/jacoco.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
