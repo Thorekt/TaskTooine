@@ -68,7 +68,8 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
 
-            -Dsonar.sources=tasktooine-api/src
+            -Dsonar.sources=tasktooine-api/src/main
+            -Dsonar.tests=tasktooine-api/src/test
             -Dsonar.java.binaries=tasktooine-api/target/classes
             -Dsonar.java.libraries=/home/runner/.m2/repository/**/*.jar
 
