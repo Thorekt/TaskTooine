@@ -38,7 +38,7 @@ jobs:
   # SonarQube code quality scan
   scan-sonarqube:
     runs-on: ubuntu-latest
-    needs: [tests-java, tests-node]
+    needs: [tests-java]
     steps:
       - uses: actions/checkout@v4
         with:
