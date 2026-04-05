@@ -3,11 +3,6 @@ package com.thorekt.tasktooine_api.core.usecase.task;
 import com.thorekt.tasktooine_api.core.entity.Task;
 import com.thorekt.tasktooine_api.core.usecase.IUseCase;
 
-/**
- * Use case responsible for updating an existing task.
- *
- * @author Thorekt
- */
 public class UpdateTaskUseCase implements IUseCase {
     private final ITaskRepository taskRepository;
     private final Task task;
@@ -16,7 +11,7 @@ public class UpdateTaskUseCase implements IUseCase {
      * Creates an update task use case.
      *
      * @param taskRepository repository used to load and persist tasks
-     * @param task task carrying the updated state
+     * @param task           task carrying the updated state
      */
     public UpdateTaskUseCase(ITaskRepository taskRepository, Task task) {
         this.taskRepository = taskRepository;

@@ -15,47 +15,28 @@ public class UpdateProjectUseCaseTest {
         Project project = new Project("project-1", "Old name", "Old description");
         repository.projects.put(project.id, project);
 
-        UpdateProjectUseCase useCase = new UpdateProjectUseCase(
-                repository,
-                project.id,
-                "New name",
-                "New description");
-
-        useCase.execute();
-
-        assertEquals("New name", project.name);
-        assertEquals("New description", project.description);
-        assertSame(project, repository.updatedProject);
-    }
-
-    @Test
-    void executeShouldNotUpdateFieldsWhenNull() {
-        FakeProjectRepository repository = new FakeProjectRepository();
-        Project project = new Project("project-1", "Old name", "Old description");
-        repository.projects.put(project.id, project);
+        Project updatedProject = new Project(project.id, "New name", "New description");
 
         UpdateProjectUseCase useCase = new UpdateProjectUseCase(
                 repository,
-                project.id,
-                null,
-                null);
+                updatedProject);
 
         useCase.execute();
 
-        assertEquals("Old name", project.name);
-        assertEquals("Old description", project.description);
-        assertSame(project, repository.updatedProject);
+        assertSame(updatedProject, repository.updatedProject);
+        assertEquals("New name", repository.projects.get(project.id).name);
+        assertEquals("New description", repository.projects.get(project.id).description);
     }
 
     @Test
     void executeShouldDoNothingWhenProjectDoesNotExist() {
         FakeProjectRepository repository = new FakeProjectRepository();
 
+        Project updatedProject = new Project("missing-project", "New name", "New description");
+
         UpdateProjectUseCase useCase = new UpdateProjectUseCase(
                 repository,
-                "missing-project",
-                "New name",
-                "New description");
+                updatedProject);
 
         useCase.execute();
 

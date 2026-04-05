@@ -15,46 +15,28 @@ public class UpdateTaskUseCaseTest {
         Task task = new Task("task-1", "Old title", "Old description");
         repository.tasks.put(task.id, task);
 
+        Task updatedTask = new Task(task.id, "New title", "New description");
+
         UpdateTaskUseCase useCase = new UpdateTaskUseCase(
                 repository,
-                task.id,
-                "New title",
-                "New description");
+                updatedTask);
 
         useCase.execute();
 
-        assertEquals("New title", task.title);
-        assertEquals("New description", task.description);
-        assertSame(task, repository.updatedTask);
-    }
-
-    @Test
-    void executeShouldNotUpdateFieldsWhenNull() {
-        FakeTaskRepository repository = new FakeTaskRepository();
-        Task task = new Task("task-1", "Old title", "Old description");
-        repository.tasks.put(task.id, task);
-        UpdateTaskUseCase useCase = new UpdateTaskUseCase(
-                repository,
-                task.id,
-                null,
-                null);
-
-        useCase.execute();
-
-        assertEquals("Old title", task.title);
-        assertEquals("Old description", task.description);
-        assertSame(task, repository.updatedTask);
+        assertSame(updatedTask, repository.updatedTask);
+        assertEquals("New title", repository.tasks.get(task.id).title);
+        assertEquals("New description", repository.tasks.get(task.id).description);
     }
 
     @Test
     void executeShouldDoNothingWhenTaskDoesNotExist() {
         FakeTaskRepository repository = new FakeTaskRepository();
 
+        Task updatedTask = new Task("missing-task", "New title", "New description");
+
         UpdateTaskUseCase useCase = new UpdateTaskUseCase(
                 repository,
-                "missing-task",
-                "New title",
-                "New description");
+                updatedTask);
 
         useCase.execute();
 
