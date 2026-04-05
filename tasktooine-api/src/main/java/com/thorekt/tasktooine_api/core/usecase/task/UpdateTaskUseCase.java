@@ -5,31 +5,28 @@ import com.thorekt.tasktooine_api.core.usecase.IUseCase;
 
 public class UpdateTaskUseCase implements IUseCase {
     private final ITaskRepository taskRepository;
-    private final String taskId;
-    private final String title;
-    private final String description;
+    private final Task task;
 
-    public UpdateTaskUseCase(ITaskRepository taskRepository, String taskId, String title, String description) {
+    /**
+     * Creates an update task use case.
+     *
+     * @param taskRepository repository used to load and persist tasks
+     * @param task task carrying the updated state
+     */
+    public UpdateTaskUseCase(ITaskRepository taskRepository, Task task) {
         this.taskRepository = taskRepository;
-        this.taskId = taskId;
-        this.title = title;
-        this.description = description;
+        this.task = task;
     }
 
+    /**
+     * Updates an existing task if it exists in the repository.
+     */
     @Override
     public void execute() {
-        Task task = taskRepository.getTaskById(taskId);
+        Task existingTask = taskRepository.getTaskById(task.id);
 
-        if (task == null) {
+        if (existingTask == null) {
             return;
-        }
-
-        if (title != null) {
-            task.title = title;
-        }
-
-        if (description != null) {
-            task.description = description;
         }
 
         taskRepository.updateTask(task);

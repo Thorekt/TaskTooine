@@ -5,36 +5,31 @@ import com.thorekt.tasktooine_api.core.usecase.IUseCase;
 
 public class UpdateProjectUseCase implements IUseCase {
     private final IProjectRepository projectRepository;
-    private final String projectId;
-    private final String name;
-    private final String description;
+    private final Project project;
 
+    /**
+     * Creates an update project use case.
+     *
+     * @param projectRepository repository used to load and persist projects
+     * @param project project carrying the updated state
+     */
     public UpdateProjectUseCase(
         IProjectRepository projectRepository,
-        String projectId,
-        String name,
-        String description
+        Project project
     ) {
         this.projectRepository = projectRepository;
-        this.projectId = projectId;
-        this.name = name;
-        this.description = description;
+        this.project = project;
     }
 
+    /**
+     * Updates an existing project if it exists in the repository.
+     */
     @Override
     public void execute() {
-        Project project = projectRepository.getProjectById(projectId);
+        Project existingProject = projectRepository.getProjectById(project.id);
 
-        if (project == null) {
+        if (existingProject == null) {
             return;
-        }
-
-        if (name != null) {
-            project.name = name;
-        }
-
-        if (description != null) {
-            project.description = description;
         }
 
         projectRepository.updateProject(project);

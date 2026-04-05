@@ -9,6 +9,8 @@ import com.thorekt.tasktooine_api.core.entity.Project;
  * 
  * Refer to Project.java for the core entity definition and TaskRecord.java for
  * the associated tasks.
+ * 
+ * @author Thorekt
  */
 public record ProjectRecord(
         String id,

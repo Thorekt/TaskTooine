@@ -10,6 +10,8 @@ import com.thorekt.tasktooine_api.core.entity.TaskStatus;
  * 
  * Refer to Task.java for the core entity definition and TaskStatus.java for the
  * possible status values.
+ * 
+ * @author Thorekt
  */
 public record TaskRecord(
         String id,
