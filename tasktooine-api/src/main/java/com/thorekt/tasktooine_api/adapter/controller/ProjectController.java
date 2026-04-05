@@ -14,6 +14,8 @@ import com.thorekt.tasktooine_api.core.usecase.project.UpdateProjectUseCase;
  * Application controller dedicated to project operations.
  * This controller orchestrates project-related use cases and exposes DTO-based
  * methods for the outer layers of the application.
+ * 
+ * @author Thorekt
  */
 public class ProjectController {
     private final IProjectRepository projectRepository;
@@ -58,7 +60,7 @@ public class ProjectController {
     /**
      * Updates the name and description of an existing project.
      *
-     * @param projectId identifier of the project to update
+     * @param projectId     identifier of the project to update
      * @param projectRecord DTO carrying the updated values
      * @return the updated project DTO, or {@code null} if no project is found
      */
@@ -74,7 +76,7 @@ public class ProjectController {
     /**
      * Adds a task to the target project.
      *
-     * @param projectId identifier of the project to update
+     * @param projectId  identifier of the project to update
      * @param taskRecord task to attach to the project
      * @return the updated project DTO, or {@code null} if no project is found
      */
@@ -87,7 +89,7 @@ public class ProjectController {
      * Removes a task from the target project.
      *
      * @param projectId identifier of the project to update
-     * @param taskId identifier of the task to remove
+     * @param taskId    identifier of the task to remove
      * @return the updated project DTO, or {@code null} if no project is found
      */
     public ProjectRecord removeTaskFromProject(String projectId, String taskId) {

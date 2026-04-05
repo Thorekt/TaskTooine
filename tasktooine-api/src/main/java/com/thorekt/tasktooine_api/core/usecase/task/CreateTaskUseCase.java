@@ -3,6 +3,11 @@ package com.thorekt.tasktooine_api.core.usecase.task;
 import com.thorekt.tasktooine_api.core.entity.Task;
 import com.thorekt.tasktooine_api.core.usecase.IUseCase;
 
+/**
+ * Use case responsible for creating a task.
+ *
+ * @author Thorekt
+ */
 public class CreateTaskUseCase implements IUseCase {
     private final ITaskRepository taskRepository;
     private final Task task;

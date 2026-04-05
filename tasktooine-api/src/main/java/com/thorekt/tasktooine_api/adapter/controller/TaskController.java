@@ -13,6 +13,8 @@ import com.thorekt.tasktooine_api.core.usecase.task.UpdateTaskUseCase;
  * Application controller dedicated to task operations.
  * This controller orchestrates task-related use cases and exposes DTO-based
  * methods for the outer layers of the application.
+ * 
+ * @author Thorekt
  */
 public class TaskController {
     private final ITaskRepository taskRepository;
@@ -56,7 +58,7 @@ public class TaskController {
     /**
      * Updates the title and description of an existing task.
      *
-     * @param taskId identifier of the task to update
+     * @param taskId     identifier of the task to update
      * @param taskRecord DTO carrying the updated values
      * @return the updated task DTO, or {@code null} if no task is found
      */
@@ -78,10 +80,9 @@ public class TaskController {
      */
     public TaskRecord updateTaskStatus(String taskId, String status) {
         new UpdateTaskStatusUseCase(
-            taskRepository,
-            taskId,
-            TaskStatus.valueOf(status)
-        ).execute();
+                taskRepository,
+                taskId,
+                TaskStatus.valueOf(status)).execute();
 
         return getTaskById(taskId);
     }

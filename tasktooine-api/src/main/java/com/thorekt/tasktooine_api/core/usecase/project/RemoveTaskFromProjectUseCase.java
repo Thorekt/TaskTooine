@@ -3,6 +3,11 @@ package com.thorekt.tasktooine_api.core.usecase.project;
 import com.thorekt.tasktooine_api.core.entity.Project;
 import com.thorekt.tasktooine_api.core.usecase.IUseCase;
 
+/**
+ * Use case responsible for removing a task from a project.
+ *
+ * @author Thorekt
+ */
 public class RemoveTaskFromProjectUseCase implements IUseCase {
     private final IProjectRepository projectRepository;
     private final String projectId;

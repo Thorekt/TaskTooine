@@ -4,6 +4,11 @@ import com.thorekt.tasktooine_api.core.entity.Task;
 import com.thorekt.tasktooine_api.core.entity.TaskStatus;
 import com.thorekt.tasktooine_api.core.usecase.IUseCase;
 
+/**
+ * Use case responsible for updating the status of an existing task.
+ *
+ * @author Thorekt
+ */
 public class UpdateTaskStatusUseCase implements IUseCase {
     private final ITaskRepository taskRepository;
     private final String taskId;

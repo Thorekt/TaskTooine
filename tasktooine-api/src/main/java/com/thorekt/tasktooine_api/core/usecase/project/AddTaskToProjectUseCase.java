@@ -4,6 +4,11 @@ import com.thorekt.tasktooine_api.core.entity.Project;
 import com.thorekt.tasktooine_api.core.entity.Task;
 import com.thorekt.tasktooine_api.core.usecase.IUseCase;
 
+/**
+ * Use case responsible for adding a task to a project.
+ *
+ * @author Thorekt
+ */
 public class AddTaskToProjectUseCase implements IUseCase {
     private final IProjectRepository projectRepository;
     private final String projectId;
