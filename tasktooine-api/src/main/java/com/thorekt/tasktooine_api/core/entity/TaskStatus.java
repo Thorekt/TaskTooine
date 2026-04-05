@@ -1,5 +1,8 @@
 package com.thorekt.tasktooine_api.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Represents the status of a task in the task management system.
  * The status indicates the current state of a task and can be one of the
@@ -26,7 +29,35 @@ public enum TaskStatus {
         this.value = value;
     }
 
+    /**
+     * Returns the serialized value of the task status.
+     *
+     * @return serialized task status value
+     */
+    @JsonValue
     public String getValue() {
         return value;
+    }
+
+    /**
+     * Creates a task status from an input value.
+     * Accepts both enum names and serialized values.
+     *
+     * @param value raw status value
+     * @return matching task status
+     */
+    @JsonCreator
+    public static TaskStatus fromValue(String value) {
+        if (value == null) {
+            return null;
+        }
+
+        for (TaskStatus status : TaskStatus.values()) {
+            if (status.name().equalsIgnoreCase(value) || status.getValue().equalsIgnoreCase(value)) {
+                return status;
+            }
+        }
+
+        throw new IllegalArgumentException("Unknown task status: " + value);
     }
 }

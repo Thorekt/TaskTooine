@@ -17,7 +17,7 @@ public record TaskRecord(
         String id,
         String title,
         String description,
-        String status) {
+        TaskStatus status) {
 
     /**
      * Converts a Task entity to a TaskRecord DTO.
@@ -30,7 +30,7 @@ public record TaskRecord(
                 task.id,
                 task.title,
                 task.description,
-                task.status.name());
+                task.status);
     }
 
     /**
@@ -43,6 +43,6 @@ public record TaskRecord(
                 this.id,
                 this.title,
                 this.description,
-                TaskStatus.valueOf(this.status));
+                this.status);
     }
 }

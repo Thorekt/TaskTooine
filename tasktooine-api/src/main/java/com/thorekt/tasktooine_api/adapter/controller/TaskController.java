@@ -75,14 +75,14 @@ public class TaskController {
      * Updates the status of an existing task.
      *
      * @param taskId identifier of the task to update
-     * @param status new task status as an enum name
+     * @param status new task status
      * @return the updated task DTO, or {@code null} if no task is found
      */
-    public TaskRecord updateTaskStatus(String taskId, String status) {
+    public TaskRecord updateTaskStatus(String taskId, TaskStatus status) {
         new UpdateTaskStatusUseCase(
                 taskRepository,
                 taskId,
-                TaskStatus.valueOf(status)).execute();
+                status).execute();
 
         return getTaskById(taskId);
     }
