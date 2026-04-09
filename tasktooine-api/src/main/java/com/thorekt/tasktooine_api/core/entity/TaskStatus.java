@@ -53,7 +53,7 @@ public enum TaskStatus {
         }
 
         for (TaskStatus status : TaskStatus.values()) {
-            if (status.name().equalsIgnoreCase(value) || status.getValue().equalsIgnoreCase(value)) {
+            if (status.getValue().equalsIgnoreCase(value)) {
                 return status;
             }
         }
